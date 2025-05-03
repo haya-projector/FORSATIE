@@ -1,0 +1,60 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرصتي - إيجاد سكن مناسب</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <h1>مرحبًا</h1>
+        <div class="scroll-down">↓</div>
+    </header>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>هل تبحث عن منزل يتوافق مع حالتك المادية أو الاجتماعية؟</h2>
+            <p>تبحث عن منزل قريب من مقر عملك؟ ساعدنا واملأ الاختبار لنتحقق من وجود وحدات سكنية قريبة من مقر عملك</p>
+            <button id="startTestBtn" class="btn">ابدأ الاختبار</button>
+        </div>
+    </section>
+
+    <div id="testModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="housingTestForm">
+                <div class="form-step active" data-step="1">
+                    <h3>المدينة المقيم فيها</h3>
+                    <select required>
+                        <option value="">اختر المدينة</option>
+                        <option value="الرياض">الرياض</option>
+                        <option value="جدة">جدة</option>
+                        <option value="مكة">مكة</option>
+                        <option value="الدمام">الدمام</option>
+                    </select>
+                </div>
+                
+                <div class="form-step" data-step="2">
+                    <h3>هل أنت مواطن أو مقيم؟</h3>
+                    <select required>
+                        <option value="">اختر</option>
+                        <option value="مواطن">مواطن</option>
+                        <option value="مقيم">مقيم</option>
+                    </select>
+                </div>
+                    <div class="form-navigation">
+                    <button type="button" class="btn prev-btn">السابق</button>
+                    <button type="button" class="btn next-btn">التالي</button>
+                    <button type="submit" class="btn submit-btn" style="display:none;">إرسال</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+```
