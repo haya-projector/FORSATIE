@@ -1,0 +1,194 @@
+
+
+### 1. ملف `index.html` (الصفحة الرئيسية)
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرصتي - إيجاد سكن مناسب</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero">
+        <h1>مرحبًا</h1>
+        <div class="scroll-down">↓</div>
+    </header>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>هل تبحث عن منزل يتوافق مع حالتك المادية أو الاجتماعية؟</h2>
+            <p>تبحث عن منزل قريب من مقر عملك؟ ساعدنا واملأ الاختبار لنتحقق من وجود وحدات سكنية قريبة من مقر عملك</p>
+            <button id="startTestBtn" class="btn">ابدأ الاختبار</button>
+        </div>
+    </section>
+
+    <div id="testModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="housingTestForm">
+                <div class="form-step active" data-step="1">
+                    <h3>المدينة المقيم فيها</h3>
+                    <select required>
+                        <option value="">اختر المدينة</option>
+                        <option value="الرياض">الرياض</option>
+                        <option value="جدة">جدة</option>
+                        <option value="مكة">مكة</option>
+                        <option value="الدمام">الدمام</option>
+                    </select>
+                </div>
+                
+                <div class="form-step" data-step="2">
+                    <h3>هل أنت مواطن أو مقيم؟</h3>
+                    <select required>
+                        <option value="">اختر</option>
+                        <option value="مواطن">مواطن</option>
+                        <option value="مقيم">مقيم</option>
+                    </select>
+                </div>
+                
+                <!-- باقي خطوات الاستبيان بنفس النمط -->
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn prev-btn">السابق</button>
+                    <button type="button" class="btn next-btn">التالي</button>
+                    <button type="submit" class="btn submit-btn" style="display:none;">إرسال</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+### 2. ملف `styles.css`
+```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.hero {
+    height: 100vh;
+    background: url('https://example.com/saudi-house.jpg') center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.scroll-down {
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-20px);}
+    60% {transform: translateY(-10px);}
+}
+
+/* باقي أنماط CSS */
+```
+
+### 3. ملف `script.js`
+```javascript
+document.addEventListener('DOMContentLoaded', function() {
+    // فتح الاستبيان
+    document.getElementById('startTestBtn').addEventListener('click', function() {
+        document.getElementById('testModal').style.display = 'block';
+    });
+
+    // إغلاق الاستبيان
+    document.querySelector('.close').addEventListener('click', function() {
+        document.getElementById('testModal').style.display = 'none';
+    });
+
+    // التنقل بين خطوات الاستبيان
+    const formSteps = document.querySelectorAll('.form-step');
+    let currentStep = 0;
+
+    function showStep(stepIndex) {
+        formSteps.forEach((step, index) => {
+            step.classList.toggle('active', index === stepIndex);
+        });
+
+        document.querySelector('.prev-btn').style.display = stepIndex === 0 ? 'none' : 'block';
+        document.querySelector('.next-btn').style.display = stepIndex === formSteps.length - 1 ? 'none' : 'block';
+        document.querySelector('.submit-btn').style.display = stepIndex === formSteps.length - 1 ? 'block' : 'none';
+    }
+
+    document.querySelector('.next-btn').addEventListener('click', function() {
+        if (currentStep < formSteps.length - 1) {
+            currentStep++;
+            showStep(currentStep);
+        }
+    });
+
+    document.querySelector('.prev-btn').addEventListener('click', function() {
+        if (currentStep > 0) {
+            currentStep--;
+            showStep(currentStep);
+        }
+    });
+
+    // إرسال الاستبيان
+    document.getElementById('housingTestForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // معالجة البيانات هنا
+        alert('شكرًا لإكمال الاستبيان! سنعرض النتائج قريبًا.');
+        document.getElementById('testModal').style.display = 'none';
+    });
+});
+```
+
+### 4. ملف `donate.html` (صفحة التبرع)
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ادعم فرصتي</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="donate-container">
+        <h2>ادعم "فرصتي"</h2>
+        <p>تبرعك يساعدنا على تطوير الموقع ومساعدة المزيد من الناس</p>
+        
+        <form action="https://www.paypal.com/donate" method="post" target="_blank">
+            <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
+            <input type="hidden" name="currency_code" value="SAR">
+            
+            <div class="form-group">
+                <label for="amount">المبلغ (ريال سعودي):</label>
+                <input type="number" id="amount" name="amount" min="1" max="250" required>
+            </div>
+            
+            <button type="submit" class="donate-btn">تبرع الآن</button>
+        </form>
+    </div>
+</body>
+</html>
+```
+
